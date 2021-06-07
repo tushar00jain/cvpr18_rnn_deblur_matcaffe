@@ -2,5 +2,8 @@ build
 build/
 .build_release/
 
-matlab_2015a_installer/
-matlab_R2015a_glnxa64.zip
+R2021a.zip
+R2021a/
+license.lic
+*.caffemodel
+*.mexa64

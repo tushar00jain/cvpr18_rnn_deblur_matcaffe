@@ -18,9 +18,10 @@ ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
 cd -
 
 apt-get install unzip
-unzip -X -K matlab_R2015a_glnxa64.zip -d matlab_2015a_installer
-cd matlab_2015a_installer
-./install -mode silent -agreeToLicense yes -fileInstallationKey
+unzip -X -K R2021a.zip
+cd R2021a
+./install -mode silent -agreeToLicense yes -fileInstallationKey ${KEY}
+/usr/local/MATLAB/R2021a/bin/activate_matlab.sh -propertiesFile /workdir/activate.ini
 ```
 
 > Train (TODO)
@@ -31,6 +32,8 @@ cd matlab_2015a_installer
 > Debug Testing
 
 ```bash
+cd /workdir/matlab/test
+/usr/local/MATLAB/R2021a/bin/matlab -nodisplay -nodesktop -r "test"
 ```
 
 ### Run
