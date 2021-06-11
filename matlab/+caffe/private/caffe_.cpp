@@ -577,10 +577,9 @@ static void get_all_data(MEX_ARGS) {
   // Step 1: prepare output array of structures
   mxArray* mx_all_data;
   {
-    const mwSize num_blobs[1] = {blobs.size()};
+    const int num_blobs[1] = {blobs.size()};
     const char* fnames[2] = {"name", "data"};
-    const mwSize one = 1;
-    mx_all_data = mxCreateStructArray(one, num_blobs, 2, fnames);
+    mx_all_data = mxCreateStructArray(1, num_blobs, 2, fnames);
   }
 
   for (unsigned int i = 0; i < blobs.size(); ++i) {
@@ -623,10 +622,9 @@ static void get_all_diff(MEX_ARGS) {
   // Step 1: prepare output array of structures
   mxArray* mx_all_diff;
   {
-    const mwSize num_blobs[1] = {blobs.size()};
+    const int num_blobs[1] = {blobs.size()};
     const char* fnames[2] = {"name", "diff"};
-    const mwSize one = 1;
-    mx_all_diff = mxCreateStructArray(one, num_blobs, 2, fnames);
+    mx_all_diff = mxCreateStructArray(1, num_blobs, 2, fnames);
   }
 
   for (unsigned int i = 0; i < blobs.size(); ++i) {
