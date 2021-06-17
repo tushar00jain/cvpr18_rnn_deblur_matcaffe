@@ -6,8 +6,8 @@ name: "LRNN_v1.prototxt"
 input:"data"
 input_dim:1
 input_dim:3
-input_dim:1280
-input_dim:720
+input_dim:256
+input_dim:256
 ########################## encoder
 layer{
   name: "conve1_1"

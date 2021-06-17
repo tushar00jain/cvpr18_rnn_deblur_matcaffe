@@ -59,5 +59,6 @@ cd /workdir/matlab/test
 > Test
 
 ```
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir dsd:0.0.3 /workdir/test.sh
 docker logs dsd --tail 100 -f
 ```
