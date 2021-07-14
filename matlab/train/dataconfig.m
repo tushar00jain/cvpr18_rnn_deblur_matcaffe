@@ -1,28 +1,33 @@
 function Solver = dataconfig(Solver)
-Solver.patchsize = 128;
-Solver.batchsize = 20;
-Solver.datapath = './data';  
-Solver.inputfolder = 'input';
-Solver.labelfolder = 'label';
-Solver.subfolderpath = dir(fullfile(Solver.datapath, Solver.inputfolder));  Solver.subfolderpath(1:2) = [];
-if exist(fullfile(Solver.datapath, 'data.mat'),'file')
-    load(fullfile(Solver.datapath, 'data.mat'));
+Solver.patchsize = 256;
+Solver.batchsize = 1;
+Solver.datapath = '/data/SOTIS2';  
+Solver.inputfolder = 'Stabilized/EurasianCitiesBase-Part1/NFrames50/NLTV-LK';
+Solver.labelfolder = 'Groundtruth/EurasianCitiesGT';
+if exist(fullfile('./data', 'data.mat'),'file')
+    load(fullfile('./data', 'data.mat'));
 else
     testlst = {};
     trainlst = {};
-    
+
     count = 1;
-    for subfolderid = 1:length(Solver.subfolderpath)
-        dir_list = dir(fullfile(Solver.datapath,Solver.inputfolder,Solver.subfolderpath(subfolderid).name,'*.png'));
-        num_png = length(dir_list);
-        for id = 1:num_png
-            trainlst{count}.input = fullfile(Solver.datapath,Solver.inputfolder,Solver.subfolderpath(subfolderid).name,dir_list(id).name);
-            trainlst{count}.label = fullfile(Solver.datapath,Solver.labelfolder,Solver.subfolderpath(subfolderid).name,dir_list(id).name);
-            count = count+1;
+    nameBase = fullfile(Solver.datapath, Solver.inputfolder);
+    ImageFolder = dir(nameBase);  
+    for I = 3:floor(length(ImageFolder)*0.75)
+        nameImageFolder = fullfile(nameBase, ImageFolder(I).name);
+        DistanceFolder = dir(nameImageFolder);
+        for L = 3:length(DistanceFolder)
+            nameDistanceFolder = fullfile(nameImageFolder, DistanceFolder(L).name);
+            Images = dir(fullfile(nameDistanceFolder, '*.png'));
+            for S = 1:length(Images)
+                trainlst{count}.input = fullfile(nameDistanceFolder, Images(S).name);
+                trainlst{count}.label = fullfile(Solver.datapath, Solver.labelfolder, [ImageFolder(I).name '.png']);
+
+                count = count+1;
+            end
         end
     end
-  
-
+    
     data.trainlst = trainlst;
     data.train_num = length(trainlst);
     data.testlst = testlst;
@@ -30,7 +35,7 @@ else
    
    
     fprintf('saving data structure ...\n');
-    save(fullfile(Solver.datapath, 'data.mat'), 'data');
+    save(fullfile('./data', 'data.mat'), 'data');
 end
 Solver.data = data;
 fprintf('Done with data config, obtain %d traning images.\n',Solver.data.train_num);

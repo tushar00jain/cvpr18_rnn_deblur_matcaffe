@@ -10,3 +10,5 @@ license.lic
 *.caffemodel
 *.mexa64
 results/
+
+data.mat

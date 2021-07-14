@@ -37,9 +37,11 @@ ln /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9 libopencv_imgproc.so.2.4
 cd -
 ```
 
-> Train (TODO)
+> Train
 
 ```bash
+cd /workdir/matlab/train
+/usr/local/MATLAB/R2015a/bin/matlab -nodisplay -nodesktop -r "train"
 ```
 
 > Debug Testing
@@ -51,9 +53,11 @@ cd /workdir/matlab/test
 
 ### Run
 
-> Train (TODO)
+> Train
 
 ```bash
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir dsd:0.0.3 /workdir/train.sh
+docker logs dsd --tail 100 -f
 ```
 
 > Test

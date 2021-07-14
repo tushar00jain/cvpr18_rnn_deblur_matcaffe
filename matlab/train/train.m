@@ -48,8 +48,8 @@ for iter = begin:Solver.max_iter
     if ~mod(iter,100)
         Solver.Solver_.save();
         % save mat
-        delete(['./model/LRNN_iter_' num2str(iter-200) '.caffemodel'])
-        delete(['./model/LRNN_iter_' num2str(iter-200) '.solverstate'])
+        delete(['./model/' Solver.snapshot_prefix '_iter_' num2str(iter-200) '.caffemodel'])
+        delete(['./model/' Solver.snapshot_prefix '_iter_' num2str(iter-200) '.solverstate'])
         save(Solver.matfile, 'Solver');
     end
     
