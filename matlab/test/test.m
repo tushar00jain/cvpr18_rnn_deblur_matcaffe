@@ -5,7 +5,7 @@ caffe.reset_all()
 Solver.Solver_ = caffe.Solver('./model/solver.prototxt');
 Solver.Solver_.net.copy_from('./model/LRNN_iter_200000.caffemodel');
 
-Base = '/data/SOTIS';
+Base = '/data/SOTIS2';
 BaseOutput = sprintf('/workdir/results');
 NFrames=50;
 Dataset = 'EurasianCitiesBase-Part1';
@@ -17,7 +17,7 @@ MethodFolder = dir(name);
 for N = 3:length(MethodFolder)
     name = sprintf('%s/%s/', Input, MethodFolder(N).name); 
     ImageFolder = dir(name);  
-    for I = 3:length(ImageFolder)
+    for I = ceil(length(ImageFolder)*0.75):length(ImageFolder)
         name = sprintf('%s/%s/%s', Input, MethodFolder(N).name, ImageFolder(I).name);
         DistanceFolder = dir(name);
         for L = 3:length(DistanceFolder)
