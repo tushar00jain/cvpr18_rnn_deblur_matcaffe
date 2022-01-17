@@ -1,6 +1,6 @@
 function Solver = dataconfig(Solver)
 Solver.patchsize = 256;
-Solver.batchsize = 20;
+Solver.batchsize = 14;
 Solver.datapath = '/data/SOTIS2';  
 Solver.inputfolder = 'Stabilized/EurasianCitiesBase-Part1/NFrames50/NLTV-LK';
 Solver.labelfolder = 'Groundtruth/EurasianCitiesGT';

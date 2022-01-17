@@ -39,13 +39,13 @@ for iter = begin:Solver.max_iter
     end
     
     % vis
-    if ~mod(iter,10)
+    if ~mod(iter,100)
         fprintf('========Processed iter %.6d, ',iter);
         fprintf('loss_L2: %d=======', mean(Solver.loss(iter-9:iter)));
         fprintf('\n');
     end    
     
-    if ~mod(iter,100)
+    if ~mod(iter,500)
         Solver.Solver_.save();
         % save mat
         delete(['./model/' Solver.snapshot_prefix '_iter_' num2str(iter-200) '.caffemodel'])
