@@ -9,7 +9,7 @@ docker build -t dsd:0.0.1 .
 ### Debug
 
 ```bash
-docker run --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir dsd:0.0.3 /bin/bash
+docker run --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /bin/bash
 
 find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \;
 cd /usr/lib/x86_64-linux-gnu
@@ -35,6 +35,9 @@ ln /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9 libopencv_core.so.2.4
 ln /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.9 libopencv_highgui.so.2.4
 ln /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9 libopencv_imgproc.so.2.4
 cd -
+
+make all -j8
+make matcaffe
 ```
 
 > Train
@@ -56,13 +59,13 @@ cd /workdir/matlab/test
 > Train
 
 ```bash
-docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir dsd:0.0.3 /workdir/train.sh
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/train.sh
 docker logs dsd --tail 100 -f
 ```
 
 > Test
 
 ```
-docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir dsd:0.0.3 /workdir/test.sh
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/test.sh
 docker logs dsd --tail 100 -f
 ```
