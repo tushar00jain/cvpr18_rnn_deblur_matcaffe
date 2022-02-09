@@ -15,5 +15,5 @@ display: 10
 max_iter: 200000
 snapshot: 10000
 snapshot_prefix: "./model/SOTIS-v1"
-solver_mode: GPU 
+solver_mode: CPU
 device_id: 0
