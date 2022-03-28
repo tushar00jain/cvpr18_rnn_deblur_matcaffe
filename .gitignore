@@ -10,7 +10,12 @@ license.lic
 *.caffemodel
 *.mexa64
 results/
+results*
 
 data.mat
 
 *.solverstate
+
+model*/
+
+*.bak

@@ -59,13 +59,13 @@ cd /workdir/matlab/test
 > Train
 
 ```bash
-docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/train.sh
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/Data/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/train.sh
 docker logs dsd --tail 100 -f
 ```
 
 > Test
 
-```
-docker run -d --mac-address ${MAC} -it --gpus all --name dsd -p 8005:8005 -v /media/DataDrive/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/test.sh
-docker logs dsd --tail 100 -f
+```bash
+docker run -d --mac-address ${MAC} -it --gpus all --name dsd-test -p 8005:8005 -v /media/Data/:/data -v $(pwd):/workdir tushar00jain/dsd:0.0.3 /workdir/test.sh
+docker logs dsd-test --tail 100 -f
 ```
